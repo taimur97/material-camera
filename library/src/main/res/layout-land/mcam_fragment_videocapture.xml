@@ -10,26 +10,28 @@
         layout="@layout/mcam_include_camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/controlsFrame" />
+        android:layout_toLeftOf="@+id/controlsFrame"
+        android:layout_toStartOf="@+id/controlsFrame" />
 
     <FrameLayout
         android:id="@+id/controlsFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="?colorPrimaryDark"
         android:elevation="@dimen/mcam_toolbar_elevation"
-        android:paddingBottom="@dimen/mcam_content_inset_less"
-        android:paddingLeft="@dimen/mcam_content_inset"
-        android:paddingRight="@dimen/mcam_content_inset"
-        android:paddingTop="@dimen/mcam_content_inset_less"
+        android:paddingBottom="@dimen/mcam_content_inset"
+        android:paddingLeft="@dimen/mcam_content_inset_less"
+        android:paddingRight="@dimen/mcam_content_inset_less"
+        android:paddingTop="@dimen/mcam_content_inset"
         tools:ignore="UnusedAttribute">
 
         <ImageButton
             android:id="@+id/facing"
             android:layout_width="@dimen/mcam_action_icon_size_smaller"
             android:layout_height="@dimen/mcam_action_icon_size_smaller"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="center_horizontal|top"
             android:background="@drawable/mcam_circle_selector"
             android:padding="@dimen/mcam_content_inset_less"
             android:scaleType="fitXY"
@@ -51,7 +53,7 @@
             android:id="@+id/recordDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
+            android:layout_gravity="center_horizontal|bottom"
             android:fontFamily="sans-serif-medium"
             android:text="@string/mcam_defaultDuration"
             android:textColor="#fff"

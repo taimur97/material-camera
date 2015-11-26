@@ -60,13 +60,13 @@ public class CameraUtil {
                         notNull = false;
                         break;
                     }
-//                    final CameraCharacteristics characteristics = manager.getCameraCharacteristics(str);
-//                    //noinspection ConstantConditions
-//                    final int supportLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
-//                    if (supportLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
-//                        notNull = false;
-//                        break;
-//                    }
+                    final CameraCharacteristics characteristics = manager.getCameraCharacteristics(str);
+                    //noinspection ConstantConditions
+                    final int supportLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
+                    if (supportLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
+                        notNull = false;
+                        break;
+                    }
                 }
             }
             return notNull;

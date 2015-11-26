@@ -101,14 +101,14 @@
 
             <ImageButton
                 android:id="@+id/playPause"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="@dimen/mcam_action_icon_size"
+                android:layout_height="@dimen/mcam_action_icon_size"
                 android:layout_gravity="center"
                 android:background="@drawable/mcam_circle_selector"
                 android:enabled="false"
                 android:padding="@dimen/mcam_content_inset_less"
                 android:scaleType="fitXY"
-                tools:background="#80000000"
+                android:src="@drawable/mcam_action_play"
                 tools:ignore="ContentDescription" />
 
             <Button

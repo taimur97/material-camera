@@ -6,5 +6,7 @@
     <dimen name="mcam_content_inset">24dp</dimen>
     <dimen name="mcam_regular_content_fontsize">16sp</dimen>
     <dimen name="mcam_regular_title_fontsize">18sp</dimen>
+    <dimen name="mcam_action_icon_size">72dp</dimen>
+    <dimen name="mcam_action_icon_size_smaller">64dp</dimen>
 
 </resources>

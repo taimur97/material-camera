@@ -90,7 +90,7 @@ abstract class BaseCameraFragment extends Fragment implements OutputUriInterface
         if (mMediaRecorder != null && mIsRecording) {
             mButtonVideo.setImageResource(R.drawable.mcam_action_stop);
         } else {
-            mButtonVideo.setImageResource(R.drawable.mcam_action_record);
+            mButtonVideo.setImageResource(R.drawable.mcam_action_capture);
             mInterface.setDidRecord(false);
         }
 

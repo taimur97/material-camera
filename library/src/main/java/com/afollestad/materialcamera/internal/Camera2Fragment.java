@@ -114,10 +114,26 @@ public class Camera2Fragment extends BaseCameraFragment implements View.OnClickL
             mCameraOpenCloseLock.release();
             cameraDevice.close();
             mCameraDevice = null;
-            Activity activity = getActivity();
-            if (null != activity) {
-                activity.finish();
+
+            String errorMsg = "Unknown camera error";
+            switch (error) {
+                case CameraDevice.StateCallback.ERROR_CAMERA_IN_USE:
+                    errorMsg = "Camera is already in use.";
+                    break;
+                case CameraDevice.StateCallback.ERROR_MAX_CAMERAS_IN_USE:
+                    errorMsg = "Max number of cameras are open, close previous cameras first.";
+                    break;
+                case CameraDevice.StateCallback.ERROR_CAMERA_DISABLED:
+                    errorMsg = "Camera is disabled, e.g. due to device policies.";
+                    break;
+                case CameraDevice.StateCallback.ERROR_CAMERA_DEVICE:
+                    errorMsg = "Camera device has encountered a fatal error, please try again.";
+                    break;
+                case CameraDevice.StateCallback.ERROR_CAMERA_SERVICE:
+                    errorMsg = "Camera service has encountered a fatal error, please try again.";
+                    break;
             }
+            throwError(new Exception(errorMsg));
         }
     };
 
@@ -227,8 +243,10 @@ public class Camera2Fragment extends BaseCameraFragment implements View.OnClickL
         if (null == activity || activity.isFinishing()) return;
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
-            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS))
+            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                 throwError(new Exception("Time out waiting to lock camera opening."));
+                return;
+            }
             if (mInterface.getFrontCamera() == null || mInterface.getBackCamera() == null) {
                 for (String cameraId : manager.getCameraIdList()) {
                     if (cameraId == null) continue;
@@ -494,7 +512,7 @@ public class Camera2Fragment extends BaseCameraFragment implements View.OnClickL
             mOutputUri = null;
 
         releaseRecorder();
-        mButtonVideo.setImageResource(R.drawable.mcam_action_record);
+        mButtonVideo.setImageResource(R.drawable.mcam_action_capture);
         mButtonFacing.setVisibility(View.VISIBLE);
         if (mInterface.getRecordingStart() > -1 && getActivity() != null)
             mInterface.onShowPreview(mOutputUri, reachedZero);

@@ -189,7 +189,8 @@ public class CameraFragment extends BaseCameraFragment implements View.OnClickLi
             Camera.Size previewSize = chooseOptimalSize(parameters.getSupportedPreviewSizes(),
                     mWindowSize.x, mWindowSize.y, mVideoSize);
             parameters.setPreviewSize(previewSize.width, previewSize.height);
-            parameters.setRecordingHint(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                parameters.setRecordingHint(true);
             setCameraDisplayOrientation(parameters);
             mCamera.setParameters(parameters);
             createPreview();
@@ -291,8 +292,9 @@ public class CameraFragment extends BaseCameraFragment implements View.OnClickLi
                 return prepareMediaRecorder(CamcorderProfile.QUALITY_720P);
             else if (forceQuality == CamcorderProfile.QUALITY_720P)
                 return prepareMediaRecorder(CamcorderProfile.QUALITY_LOW);
-            else if (forceQuality == CamcorderProfile.QUALITY_LOW)
+            else if (forceQuality == CamcorderProfile.QUALITY_LOW) {
                 return prepareMediaRecorder(CamcorderProfile.QUALITY_1080P);
+            }
             throwError(new Exception("Failed to begin recording: " + t.getMessage(), t));
             return false;
         }
@@ -368,7 +370,7 @@ public class CameraFragment extends BaseCameraFragment implements View.OnClickLi
         if (!mInterface.didRecord())
             mOutputUri = null;
 
-        mButtonVideo.setImageResource(R.drawable.mcam_action_record);
+        mButtonVideo.setImageResource(R.drawable.mcam_action_capture);
         mButtonFacing.setVisibility(View.VISIBLE);
         if (mInterface.getRecordingStart() > -1 && getActivity() != null)
             mInterface.onShowPreview(mOutputUri, reachedZero);

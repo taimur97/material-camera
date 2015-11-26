@@ -272,8 +272,16 @@ public class PlaybackVideoFragment extends Fragment implements
 
     @Override
     public void onError(MediaPlayer mp, int what, int extra) {
+        if (what == -38) {
+            // Error code -38 happens on some Samsung devices
+            // Just ignore it
+            return;
+        }
         String errorMsg = "Preparation/playback error: ";
         switch (what) {
+            default:
+                errorMsg += String.format("Unknown error %d", what);
+                break;
             case MediaPlayer.MEDIA_ERROR_IO:
                 errorMsg += "I/O error";
                 break;

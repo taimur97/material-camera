@@ -29,7 +29,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * @author Aidan Follestad (afollestad)
  */
-class VideoStreamView extends SurfaceView implements SurfaceHolder.Callback,
+public class VideoStreamView extends SurfaceView implements SurfaceHolder.Callback,
         MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnVideoSizeChangedListener {
 
     @Override

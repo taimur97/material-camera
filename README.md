@@ -4,11 +4,65 @@ Android's video recording APIs are very difficult to figure out, especially sinc
 like to mount their camera sensors upside down or sideways. This library is a result of lots of research
 and experimentation to get video recording to work universally.
 
-![Art](https://raw.githubusercontent.com/afollestad/material-camera/master/art/screen.png)
+![Art](https://raw.githubusercontent.com/afollestad/material-camera/master/art/deviceart.png)
 
 ---
 
+# Notice
+
+Please report any issues you have, and include device information. Camera behavior can be unpredictable
+across different Android manufacturers and versions, especially on pre-Lollipop devices. I've done quite
+a bit of testing, but it's possible I missed something.
+
+---
+
+# Gradle Dependency
+
+[![Release](https://img.shields.io/github/release/afollestad/material-camera.svg?label=jitpack)](https://jitpack.io/#afollestad/material-camera)
+
+### Repository
+
+```gradle
+repositories {
+    maven { url "https://jitpack.io" }
+}
+```
+
+### Dependency
+
+```gradle
+dependencies {
+
+    // ... other dependencies here
+
+    compile('com.github.afollestad.material-camera:0.1.1@aar') {
+        transitive = true
+    }
+}
+```
+
+---
+
+
 # Basics
+
+### Android Manifest
+
+First, you have to register two library Activities from your app's `AndroidManifest.xml` file:
+
+```xml
+<activity
+    android:name="com.afollestad.materialcamera.CaptureActivity"
+    android:theme="@style/MaterialCamera.CaptureActivity" />
+<activity
+    android:name="com.afollestad.materialcamera.CaptureActivity2"
+    android:theme="@style/MaterialCamera.CaptureActivity" />
+```
+            
+Feel free to use your own custom theme. The included themes give the activities a good default look. 
+See the sample project for more details.
+
+### Code
 
 ```java
 private final static int CAMERA_RQ = 6969; 
@@ -50,7 +104,7 @@ When the time limit reaches 0, recording stops. There are different behaviors th
 3. `autoSubmit(true)`, `allowRetry(false)`
     * The user won't be able to playback the recording, the result will immediately be returned to the starting Activity.
 4. `autoSubmit(true)`, `allowRetry(true)`
-    * If you don't specify a length limit, the behavior will be the same as number 1. If you do specify a length limit, the user is allowed to retry, but the countdown timer will continue until it reaches 0. When the countdown is complete, the result will be returned to the starting Activity automatically.
+    * If you don't specify a length limit, the behavior will be the same as number 3. If you do specify a length limit, the user is allowed to retry, but the countdown timer will continue until it reaches 0. When the countdown is complete, the result will be returned to the starting Activity automatically.
 
 ---
 
@@ -88,3 +142,14 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+
+---
+
+# [LICENSE](/LICENSE.md)
+
+#### GNU GENERAL PUBLIC LICENSE
+#### Version 3, 29 June 2007
+
+Copyright © 2007 Free Software Foundation, Inc. http://fsf.org/
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
